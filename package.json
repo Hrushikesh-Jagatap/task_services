@@ -1,5 +1,5 @@
 {
-    "name": "user_mgmt_service",
+    "name": "task_mgmt_service",
     "version": "1.0.0",
     "description": "Task Management Service",
     "main": "./server.js",

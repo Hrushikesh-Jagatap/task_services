@@ -1,24 +1,20 @@
 const AssignService = require('@root/src/apis/services/v1/CreateAssignment');
 
+const { HttpResponseHandler } = require('intelli-utility');
+
 // Controller function to create a new Assignment
-const createAssign = async (req, res) => {
+const createAssign = async (req, res, next) => {
     try {
         const newAssign = await AssignService.createAssign(req.body);
 
         if (!newAssign) {
-            res.status(400).json({ error: 'Error in creating New Assignment' });
+            return HttpResponseHandler.success(req, res, newAssign);
         }
 
-        const result = {
-            data: newAssign,
-            success: true,
-            message: 'Assignment created successfully',
-        };
+        return HttpResponseHandler.success(req, res, newAssign);
 
-        res.status(201).json(result);
     } catch (error) {
-        console.error(error);
-        return res.status(500).json({ error: 'Internal server error' });
+        next(error);
     }
 };
 

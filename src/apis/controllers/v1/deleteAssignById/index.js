@@ -6,12 +6,11 @@ const deleteAssignById = async (req, res) => {
         const deletedAssign = await ExamService.deleteAssignById(req.params.id);
 
         const result = {};
-
         if (!deletedAssign) {
-            return result;
+            return HttpResponseHandler.success(req, res, result);
         }
-
-        return result;
+        
+        return HttpResponseHandler.success(req, res, result);
 
     } catch (error) {
         console.error(error);

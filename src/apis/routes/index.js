@@ -24,10 +24,6 @@ router.get('/healthcheck', (req, res) => {
   return HttpResponseHandler.success(req, res, data);
 });
 
-// router.get('/utc', (req, res) => {
-//  return HttpResponseHandler.success(req, res, timeZoneHandler.getCurrentUTCMoment.toISOString());
-// });
-
 router.use('/v1', v1Routes);
 
 router.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openApiDocumentation));

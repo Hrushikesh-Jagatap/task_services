@@ -4,16 +4,16 @@ const router = express.Router();
 
 const DeletExamByIdController = require('@root/src/apis/controllers/v1/deleteExamById')
 
-router.delete('/:id', async (req, res) => {
-    const result = await DeletExamByIdController.deleteExamById(req)
+const { HttpResponseHandler } = require('intelli-utility');
+
+router.delete('/:id', async (req, res, next) => {
+    const result = await DeletExamByIdController.deleteExamById(req, res, next)
     if (!result) {
-        res.status(404).json({ message: 'Exam not found' });
+        return HttpResponseHandler.success(req, res, result);
     } else {
-        res.json({ message: 'Exam deleted successfully' });
+        next(error);
     }
 });
 
 module.exports = router;
 
-
-module.exports = router;

@@ -1,28 +1,21 @@
 const ExamService = require('@root/src/apis/services/v1/UpdateExamById');
-
+const { HttpResponseHandler } = require('intelli-utility');
 
 // update /exam
-const updateExamById = async (req, res) => {
+const updateExamById = async (req, res, next) => {
 
   const { teacherId } = req.body;
   try {
     const updateExam = await ExamService.updateExamById(req.params.id, req.body);
-    const result = {
-      data: null,
-      success: false,
-      error: 'Error in updating Exam',
-    };
-    if (!updateExam) {
-      return result;
-    }
-    result.data = updateExam;
-    result.success = true;
-    result.error = 'success'
 
-    return result;
+    if (!updateExam) {
+      return HttpResponseHandler.success(req, res, updateExam);
+    }
+
+    return HttpResponseHandler.success(req, res, updateExam);
+
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    next(error);
   }
 };
 

@@ -4,13 +4,12 @@ const router = express.Router();
 
 const getAssignByBatchIdController = require('@root/src/apis/controllers/v1/getAssignByBatchId')
 
-router.get('/batch/:id',async(req, res) => {
+router.get('/batch/:id',async(req, res, next) => {
     try {
-        const result = await getAssignByBatchIdController.getAssignByBatchId(req, res);
-        res.status(201).json(result);
+        const result = await getAssignByBatchIdController.getAssignByBatchId(req, res, next);
+       
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+        next(error);
     }    
 });
 

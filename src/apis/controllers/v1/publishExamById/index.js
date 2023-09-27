@@ -1,26 +1,19 @@
-
 const ExamService = require('@root/src/apis/services/v1/publishExamById');
+const { HttpResponseHandler } = require('intelli-utility');
 
 // Controller function to get a single teacher by userID
-const publishExamById = async (req, res) => {
+const publishExamById = async (req, res, next) => {
     try {
         const Exam = await ExamService.publishExamById(req.params.Id);
-        const result = {
-            data: null,
-            success: false,
-            error: 'Error in publishing Exam',
-        }
+
         if (!Exam) {
-            res.json(Exam);
+            return HttpResponseHandler.success(req, res, Exam);
         }
-        result.data = Exam;
-        result.success = true;
-        result.error = 'Exam data published'
-        res.status(200).json(result);
+
+        return HttpResponseHandler.success(req, res, Exam);
 
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+        next(error);
     }
 };
 

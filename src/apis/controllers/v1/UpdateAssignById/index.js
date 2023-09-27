@@ -1,23 +1,18 @@
 const TeacherService = require('@root/src/apis/services/v1/UpdateAssignById');
-
+const { HttpResponseHandler } = require('intelli-utility');
 // Controller function to update a Assign by ID
 const updateAssignById = async (req, res) => {
   try {
     const updatedAssign = await TeacherService.updatedAssignById(req.params.id, req.body);
-    const result = {
-      data: null,
-      success: false,
-      error: 'Error in updating Teacher',
-    };
+
     if (!updatedAssign) {
-      return result;
+      return HttpResponseHandler.success(req, res, updatedAssign);
     }
-    result.data = updatedAssign;
-    result.success = true;
-    return result;
+
+    return HttpResponseHandler.success(req, res, updatedAssign);
+
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
+    next(error)
   }
 };
 

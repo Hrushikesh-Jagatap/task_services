@@ -4,13 +4,12 @@ const router = express.Router();
 
 const getExamDetaialsByIdController = require('@root/src/apis/controllers/v1/getExamDetaialsById')
 
-router.get('/exam/:Id',async(req, res) => {
+router.get('/exam/:Id',async(req, res, next) => {
     try {
-        const result = await getExamDetaialsByIdController.getExamDetailsId(req, res);
-        res.status(201).json(result);
+        const result = await getExamDetaialsByIdController.getExamDetailsId(req, res, next);
+    
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+       next(error);
     }    
 });
 

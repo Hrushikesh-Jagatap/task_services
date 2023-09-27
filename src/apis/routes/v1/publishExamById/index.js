@@ -4,13 +4,12 @@ const router = express.Router();
 
 const publishExamByIdController = require('@root/src/apis/controllers/v1/publishExamById')
 
-router.patch('/exam/:Id',async(req, res) => {
+router.patch('/exam/:Id',async(req, res, next) => {
     try {
-        const result = await publishExamByIdController.publishExamById(req, res);
-        res.status(200).json(result);
+        const result = await publishExamByIdController.publishExamById(req, res, next);
+    
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+        next(error);
     }    
 });
 

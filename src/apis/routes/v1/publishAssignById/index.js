@@ -4,13 +4,12 @@ const router = express.Router();
 
 const publishAssignByIdController = require('@root/src/apis/controllers/v1/publishAssignById')
 
-router.patch('/assign/:Id',async(req, res) => {
+router.patch('/assign/:Id',async(req, res, next) => {
     try {
-        const result = await publishAssignByIdController.publishAssignById(req, res);
-        res.status(200).json(result);
+        const result = await publishAssignByIdController.publishAssignById(req, res, next);
+      
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+       next(error);
     }    
 });
 

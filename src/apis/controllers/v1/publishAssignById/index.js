@@ -1,24 +1,21 @@
 const TeacherService = require('@root/src/apis/services/v1/publishAssignById');
+const { HttpResponseHandler } = require('intelli-utility');
 
 // Controller function to get a single teacher by userID
-const publishAssignById = async (req, res) => {
+const publishAssignById = async (req, res, next) => {
     try {
         const Assign = await TeacherService.publishAssignById(req.params.Id);
-        const result = {
-            data: null,
-            success: false,
-            error: 'Error in publishing Assignment',
-        }
+        
         if (!Assign) {
-            return Assign;
+            return HttpResponseHandler.success(req, res, Assign);
         }
-        result.data = Assign;
-        result.success = true;
-        return result;
+
+        return HttpResponseHandler.success(req, res, Assign);
+
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+        next(error)
     }
+
 };
 
 module.exports = {

@@ -4,13 +4,12 @@ const router = express.Router();
 
 const UpdateExamByIdController = require('@controllers/v1/UpdateExamById')
 
-router.put('/exam/:id', async(req, res) => {
+router.put('/exam/:id', async(req, res, next) => {
     try {
-        const result = await UpdateExamByIdController.updateExamById(req, res);
-        return res.status(201).json(result);
+        const result = await UpdateExamByIdController.updateExamById(req, res, next);
+
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+        next(error);
     } 
 
 });

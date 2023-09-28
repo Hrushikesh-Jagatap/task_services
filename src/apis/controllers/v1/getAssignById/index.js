@@ -1,24 +1,19 @@
 const AssignService = require('@root/src/apis/services/v1/getAssignById');
+const { HttpResponseHandler } = require('intelli-utility');
 
 // Controller function to get a single Assign by ID
-const getAssignById = async (req, res) => {
+const getAssignById = async (req, res, next) => {
     try {
         const assign = await AssignService.getAssignById(req.params.id.toString());
-        const result = {
-            data: null,
-            success: false,
-            error: 'Error in Finding Assignment ',
-        }
+
         if (!assign) {
-            res.status(200).json(result);
+            return HttpResponseHandler.success(req, res, assign);
         }
-        result.data = assign;
-        result.success = true;
-        result.error = 'Geting Assignment Suceessfully'
-        res.status(200).json(result);
+
+        return HttpResponseHandler.success(req, res, assign);
+
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+        next(error);
     }
 };
 

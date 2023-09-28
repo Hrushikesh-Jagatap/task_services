@@ -1,24 +1,24 @@
 const ExamService = require('@services/v1/CreateExam');
+const { HttpResponseHandler } = require('intelli-utility');
 
-// POST /exam
-const createExam = async (req, res) => {
-  
+
+// POST // create exam
+const createExam = async (req, res, next) => {
+
   try {
 
     const examData = req.body;
+
     const createdExam = await ExamService.createExam(examData);
-    
-    const result = {
-      data: createdExam,
-      success: true,
-      message: 'Exam created successfully',
-    };
-    
-    return res.status(201).json(result);
+
+    if (!createdExam) {
+      return HttpResponseHandler.success(req, res, createdExam);
+    }
+
+    return HttpResponseHandler.success(req, res, createdExam);
 
   } catch (error) {
-
-    return res.status(500).json({ error: error.message });
+    next(error);
   }
 };
 

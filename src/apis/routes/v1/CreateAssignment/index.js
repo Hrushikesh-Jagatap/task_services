@@ -4,13 +4,12 @@ const router = express.Router();
 
 const CreateAssignController = require('@controllers/v1/CreateAssignment');
 
-router.post('/create-assign', async (req, res) => {
+router.post('/create-assign', async (req, res, next) => {
     try {
-        const result = await CreateAssignController.createAssign(req, res);
-        res.status(201).json(result);
+        const result = await CreateAssignController.createAssign(req, res, next);
+
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+        next(error);
     }
 });
 

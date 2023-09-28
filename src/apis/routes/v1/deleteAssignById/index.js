@@ -4,16 +4,15 @@ const router = express.Router();
 
 const DeleteAssignByIdController = require('@root/src/apis/controllers/v1/deleteAssignById')
 
-router.delete('/assign/:id', async (req, res) => {
-    const result = await DeleteAssignByIdController.deleteAssignById(req)
+router.delete('/assign/:id', async (req, res, next) => {
+
+    const result = await DeleteAssignByIdController.deleteAssignById(req. res, next)
     if (!result) {
-        res.status(404).json({ message: 'Assignment not found' });
+        return HttpResponseHandler.success(req, res, result);
     } else {
-        res.json({ message: 'Assignment deleted successfully' });
+        next(error);
     }
+
 });
-
-module.exports = router;
-
 
 module.exports = router;

@@ -1,25 +1,21 @@
 
 const ExamService = require('@root/src/apis/services/v1/getExamDetaialsById')
 
+const { HttpResponseHandler } = require('intelli-utility');
+
 // Controller function to get a single batch by  teacherid
-const getExamDetailsId = async (req, res) => {
+const getExamDetailsId = async (req, res, next) => {
     try {
         const exam = await ExamService.getExamDetailsId(req.params.Id);
-        const result = {
-            data: null,
-            success: false,
-            error: 'Error in Finding  ExamDetails By Id',
-        }
+
         if (!exam) {
-            res.json(result);
+            return HttpResponseHandler.success(req, res, exam);
         }
-        result.data = exam;
-        result.success = true;
-        result.error = "Getting successfully By ExamId"
-        res.status(200).json(result);
+
+        return HttpResponseHandler.success(req, res, exam);
+
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+        next(error);
     }
 };
 

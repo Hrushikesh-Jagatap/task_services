@@ -1,25 +1,20 @@
-
 const ExamService = require('@root/src/apis/services/v1/getExamDetaialsByBatchId')
+const { HttpResponseHandler } = require('intelli-utility');
 
 // Controller function to get a single batch by  teacherid
-const getExamDetailsByBatchId = async (req, res) => {
+const getExamDetailsByBatchId = async (req, res, next) => {
     try {
+
         const batch = await ExamService.getExamDetailsByBatchId(req.params.Id);
-        const result = {
-            data: null,
-            success: false,
-            error: 'Error in Finding  ExamDetails By BatchId',
-        }
+
         if (!batch) {
-            res.json(result);
+            return HttpResponseHandler.success(req, res, batch);
         }
-        result.data = batch;
-        result.success = true;
-        result.error = 'Getting Exam Details By BtachId'
-        res.json(result);
+
+        return HttpResponseHandler.success(req, res, batch);
+
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+        next(error);
     }
 };
 

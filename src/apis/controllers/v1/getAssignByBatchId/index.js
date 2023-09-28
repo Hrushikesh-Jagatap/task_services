@@ -1,26 +1,19 @@
 const AssignService = require('@root/src/apis/services/v1/getAssignByBatchId');
+const { HttpResponseHandler } = require('intelli-utility');
 
 // Controller function to get a Assignment  by  Batch ID
-const getAssignByBatchId = async (req, res) => {
+const getAssignByBatchId = async (req, res, next) => {
     try {
         const batch = await AssignService.getAssignByBatchId(req.params.id);
 
-        const result = {
-            data: null,
-            success: false,
-            error: 'Error in Finding  Assignment By BatchId',
-        }
         if (!batch) {
-            res.json(result);
+            return HttpResponseHandler.success(req, res, batch);
         }
-        result.data = batch;
-        result.success = true;
-        result.error = 'Getting Assignment Successfully By Batch id'
-        res.status(200).json(result);
+        
+        return HttpResponseHandler.success(req, res, batch);
 
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Internal server error' });
+        next(error);
     }
 };
 

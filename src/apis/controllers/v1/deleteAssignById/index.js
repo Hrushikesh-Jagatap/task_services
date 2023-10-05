@@ -1,4 +1,5 @@
 const ExamService = require('@root/src/apis/services/v1/deleteAssignById');
+const { HttpResponseHandler } = require('intelli-utility');
 
 // Controller function to delete a teacher by ID
 const deleteAssignById = async (req, res) => {
@@ -9,7 +10,7 @@ const deleteAssignById = async (req, res) => {
         if (!deletedAssign) {
             return HttpResponseHandler.success(req, res, result);
         }
-        
+
         return HttpResponseHandler.success(req, res, result);
 
     } catch (error) {

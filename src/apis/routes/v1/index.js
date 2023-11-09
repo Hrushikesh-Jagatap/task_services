@@ -28,6 +28,31 @@ const deleteExamById = require('./deleteExamById');
 
 const deleteAssignById = require('./deleteAssignById');
 
+const createResource = require('./createResource');
+
+const updateResourceById = require('./updateResourceById');
+
+const getResourceById = require('./getResourceById');
+
+const publishedResourceById = require('./publishedResourceById');
+
+const getAllResourcesByUserId = require('./getAllResourcesByUserId');
+
+// route to get All Resources By userId.
+router.use('/', getAllResourcesByUserId);
+
+//router to published by userId
+router.use('/', publishedResourceById);
+
+//Route to get Resource By Id
+router.use('/', getResourceById);
+
+//Route to update Resource By Id
+router.use('/', updateResourceById)
+
+//Route to create Resource
+router.use('/', createResource);
+
 //Route to get delete Assigned by Id
 router.use('/', deleteAssignById);
 

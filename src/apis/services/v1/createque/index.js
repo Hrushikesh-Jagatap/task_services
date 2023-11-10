@@ -1,17 +1,17 @@
 
 //  Exam model
-const Exam = require('@models/que');
+const Que = require('@models/que');
 
 // Create multiple Exam
-const createExam = async (examData) => {
+const createQue = async (queData) => {
   try {
-    const createdExam = await Exam.create(examData);
-    return createdExam;
+    const createdQue = await Que.create(queData);
+    return createdQue;
   } catch (error) {
     throw new Error('Failed to create Exam');
   }
 }
 
 module.exports = {
-  createExam,
+  createQue,
 };

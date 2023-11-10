@@ -1,21 +1,21 @@
-const ExamService = require('@services/v1/createque');
+const QueService = require('@services/v1/createque');
 const { HttpResponseHandler } = require('intelli-utility');
 
 
 // POST // create exam
-const createExam = async (req, res, next) => {
+const createQue = async (req, res, next) => {
 
   try {
 
-    const examData = req.body;
+    const queData = req.body;
 
-    const createdExam = await ExamService.createExam(examData);
+    const createdQue = await QueService.createQue(queData);
 
-    if (!createdExam) {
-      return HttpResponseHandler.success(req, res, createdExam);
+    if (!createdQue) {
+      return HttpResponseHandler.success(req, res, createdQue);
     }
 
-    return HttpResponseHandler.success(req, res, createdExam);
+    return HttpResponseHandler.success(req, res, createdQue);
 
   } catch (error) {
     next(error);
@@ -23,5 +23,5 @@ const createExam = async (req, res, next) => {
 };
 
 module.exports = {
-  createExam,
+  createQue,
 };

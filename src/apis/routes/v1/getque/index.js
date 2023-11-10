@@ -2,11 +2,11 @@ const express = require('express');
 
 const router = express.Router();
 
-const getAssignByIdController = require('@controllers/v1/getque')
+const getQueByIdController = require('@controllers/v1/getque')
 
 router.get('/getque/:id',async(req, res, next) => {
     try {
-        const result = await getAssignByIdController.getAssignByBatchId(req, res, next);
+        const result = await getQueByIdController.getQueById(req, res, next);
     } catch (error) {
         next(error);
     }    

@@ -1,7 +1,7 @@
 const ExamData = require('@models/que');
 
 // Service function to update a Exam by ID
-const updateExamById = async (examId, examData) => {
+const updateQueById = async (examId, examData) => {
   try {
     const updatedExam = await ExamData.findByIdAndUpdate(examId, examData, { new: true });
     return updatedExam;
@@ -11,5 +11,5 @@ const updateExamById = async (examId, examData) => {
 };
 
 module.exports = {
-    updateExamById,
+    updateQueById,
 };

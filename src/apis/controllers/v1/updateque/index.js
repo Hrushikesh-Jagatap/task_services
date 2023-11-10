@@ -6,13 +6,13 @@ const updatequeById = async (req, res, next) => {
 
   const { teacherId } = req.body;
   try {
-    const updateExam = await queService.updateExamById(req.params.id, req.body);
+    const updateQue = await queService.updateQueById(req.params.id, req.body);
 
-    if (!updateExam) {
-      return HttpResponseHandler.success(req, res, updateExam);
+    if (!updateQue) {
+      return HttpResponseHandler.success(req, res, updateQue);
     }
 
-    return HttpResponseHandler.success(req, res, updateExam);
+    return HttpResponseHandler.success(req, res, updateQue);
 
   } catch (error) {
     next(error);

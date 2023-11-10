@@ -5,12 +5,12 @@ const mongoose = require('mongoose');
 const getquebyteacherid = async (teacherids) => {
   try {
     console.log(teacherids);
-   // const Assign = await AssignData.findOne({ _id: });
+  
         const Que = await QueData.find({ teacherid: teacherids });
 
     return Que;
   } catch (error) {
-    throw new Error('Failed to get Assignment By  BatchId');
+    throw new Error('Failed to get que by teacherid');
   }
 };
 

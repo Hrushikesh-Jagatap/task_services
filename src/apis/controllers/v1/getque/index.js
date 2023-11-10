@@ -1,16 +1,16 @@
-const AssignService = require('@root/src/apis/services/v1/getque');
+const QueService = require('@root/src/apis/services/v1/getque');
 const { HttpResponseHandler } = require('intelli-utility');
 
-// Controller function to get a Assignment  by  Batch ID
-const getAssignByBatchId = async (req, res, next) => {
+// Controller function to get a Que  by  ID
+const getQueById = async (req, res, next) => {
     try {
-        const batch = await AssignService.getAssignByBatchId(req.params.id);
+        const que = await QueService.getQueById(req.params.id);
 
-        if (!batch) {
-            return HttpResponseHandler.success(req, res, batch);
+        if (!que) {
+            return HttpResponseHandler.success(req, res, que);
         }
         
-        return HttpResponseHandler.success(req, res, batch);
+        return HttpResponseHandler.success(req, res, que);
 
     } catch (error) {
         next(error);
@@ -18,5 +18,5 @@ const getAssignByBatchId = async (req, res, next) => {
 };
 
 module.exports = {
-    getAssignByBatchId
+    getQueById
 }  

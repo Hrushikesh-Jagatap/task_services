@@ -6,6 +6,12 @@ const resourceSchema = new mongoose.Schema({
         type: String,
         // required: true
     },
+    subject: {
+        type:string
+    },
+    language: {
+        type:String
+    },
     userId: {
         type: String,
         // required: true

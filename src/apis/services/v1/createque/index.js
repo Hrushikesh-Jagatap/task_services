@@ -7,7 +7,7 @@ const getTeacher = async (args) => {
   try {
     const { className, subject, studentid } = args;
     
-    const url = `${loadBalancer}/tms/apis/v1/searchforinstance?className=${className}&subject=${subject}&studentid=${studentid}`;
+    const url = `${teacher}/tms/apis/v1/searchforinstance?className=${className}&subject=${subject}&studentid=${studentid}`;
 
     const config = {
       method: 'get',

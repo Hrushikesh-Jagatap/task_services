@@ -6,7 +6,7 @@ const getquebyteacherid = async (teacherids) => {
   try {
     console.log(teacherids);
   
-        const Que = await QueData.find({ teacherid: teacherids });
+        const Que = await QueData.find({" req_teacherid.teacherid": teacherids });
 
     return Que;
   } catch (error) {

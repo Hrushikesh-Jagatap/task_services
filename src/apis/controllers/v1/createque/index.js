@@ -15,6 +15,11 @@ const createQue = async (req, res, next) => {
       return HttpResponseHandler.success(req, res, createdQue);
     }
 
+   if(createdQue=="no active teacher")
+   {
+    return HttpResponseHandler.success(req, res, createdQue);
+   // return HttpResponseHandler.success(req, res,);
+   }
     return HttpResponseHandler.success(req, res, createdQue);
 
   } catch (error) {

@@ -44,6 +44,7 @@ const getquebystudentid = require('./getquebystudentid');
 const getquebyteacherid = require('./getquebyteacherid');
 
 const updateque = require('./updateque');
+const updatestatus = require('./updatestatus');
 
 
 // route to get All Resources By userId.
@@ -103,4 +104,7 @@ router.use('/',getquebystudentid);
 router.use('/',getquebyteacherid);
 
 router.use('/',updateque);
+router.use('/',updatestatus);
+
+
 module.exports = router;

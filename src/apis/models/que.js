@@ -8,8 +8,6 @@ const queschema = new mongoose.Schema({
   status:String,
   duration:String,
   studnetid:String,
-  rteacherid:[String],
-  ateacherid:[String],
   req_teacherid:[{
     teacherid:String,
     status:{

@@ -39,7 +39,7 @@ module.exports = {
     serviceName: HOST_SERVICE_NAME,
     buildNumber: BUILD_NUMBER,
     loadBalancer: LOAD_BALANCER,
-  student:  STUDENT
+  student:  STUDENT,
   teacher: TEACHER,
     
   },
@@ -56,7 +56,7 @@ module.exports = {
   systemToken: SYSTEM_TOKEN,
   loadBalancer: LOAD_BALANCER,
 teacher: TEACHER,
-    student:  STUDENT
+    student:  STUDENT,
 
   sessionName: SESSION_NAME,
 };

@@ -38,7 +38,7 @@ const publishedResourceById = require('./publishedResourceById');
 
 const getAllResourcesByUserId = require('./getAllResourcesByUserId');
 
- const createque = require('./createque');\
+ const createque = require('./createque');
 
 const getque = require('./getque');
 

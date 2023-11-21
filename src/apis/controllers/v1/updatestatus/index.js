@@ -23,7 +23,7 @@ const updatesattusById = async (req, res, next) => {
  //     data={updateQue,meetinflink : "myeduc.ddns.net"}
    
  // console.log("++++++++++++++",data)
-     const meetingUrl = "myeduc.ddns.net";
+     const meetingUrl = "https://myeduc.ddns.net/BlindBenchmarksTearTemporarily";
 const result = await Que.findOneAndUpdate(
   { "req_teacherid._id": updateQue[0]._id },
   { $set: { "req_teacherid.$.meetingurl": meetingUrl } },

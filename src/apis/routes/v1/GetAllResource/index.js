@@ -1,19 +1,11 @@
-const ResourceService = require('@root/src/apis/services/v1/GetAllResource');
-const { HttpResponseHandler } = require('intelli-utility');
-// Controller function to get a Assignment  by  Batch ID
-const getAllResources = async (req, res, next) => {
+const express = require('express');
+const router = express.Router();
+const getAssignByController = require('@controllers/v1/GetAllResource')
+router.get('/resource',async(req, res, next) => {
     try {
-        
-        const resources = await ResourceService.getAllResources();
-        if (!resources) {
-            return HttpResponseHandler.success(req, res, resources);
-        }
-        
-        return HttpResponseHandler.success(req, res, resources);
+        const result = await getAssignByController.getAllResources(req, res, next);
     } catch (error) {
         next(error);
-    }
-};
-module.exports = {
-    getAllResources
-}  
+    }    
+});
+module.exports = router;

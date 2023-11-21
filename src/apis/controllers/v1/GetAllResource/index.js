@@ -1,3 +1,6 @@
+const ResourceService = require('@root/src/apis/services/v1/GetAllResource');
+const { HttpResponseHandler } = require('intelli-utility');
+
 const getAllResources = async (req, res, next) => {
     try {
         

@@ -38,14 +38,21 @@ const publishedResourceById = require('./publishedResourceById');
 
 const getAllResourcesByUserId = require('./getAllResourcesByUserId');
 
- const createque = require('./createque');
+ const createque = require('./createque');\
+
 const getque = require('./getque');
+
 const getquebystudentid = require('./getquebystudentid');
+
 const getquebyteacherid = require('./getquebyteacherid');
 
 const updateque = require('./updateque');
-const updatestatus = require('./updatestatus');
 
+const updatestatus = require('./updatestatus');
+const GetAllResource = require('./GetAllResource');
+
+
+router.use('/', GetAllResource);
 
 // route to get All Resources By userId.
 router.use('/', getAllResourcesByUserId);

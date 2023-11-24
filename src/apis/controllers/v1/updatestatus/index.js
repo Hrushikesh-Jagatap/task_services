@@ -8,8 +8,9 @@ const updatesattusById = async (req, res, next) => {
   const { teacherId } = req.body;
   try {
     const updateQue = await statusService.updateStatusById(req.params.id, req.body);
- console.log("++++++++++++++",updateQue[0].status)
+    console.log("++++++++++++++",updateQue[0].status);
 
+    
     if (!updateQue) {
       return HttpResponseHandler.success(req, res, updateQue);
     }
@@ -23,7 +24,11 @@ const updatesattusById = async (req, res, next) => {
  //     data={updateQue,meetinflink : "myeduc.ddns.net"}
    
  // console.log("++++++++++++++",data)
-     const meetingUrl = "https://myeduc.ddns.net/BlindBenchmarksTearTemporarily";
+     // const meetingUrl = "https://myeduc.ddns.net/BlindBenchmarksTearTemporarily";
+
+let abc = (updateQue[0]._id).toString();
+const meetingUrl = `https://myeduc.ddns.net/${abc}`;
+    
 const result = await Que.findOneAndUpdate(
   { "req_teacherid._id": updateQue[0]._id },
   { $set: { "req_teacherid.$.meetingurl": meetingUrl } },

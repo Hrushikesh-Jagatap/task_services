@@ -1,25 +1,55 @@
-const ResourceService = require('@root/src/apis/services/v1/publishedResourceById');
+const ResourceData = require('@models/Resources');
+const { default: mongoose } = require('mongoose');
+const { getStudentsBySubjectAndClass } = require('@services/v1/getStudentsBySubjectAndClass');
+const { notifyStudentsForResourceUpdation, pushNotification } = require('@services/v1/Notification')
 
-const { HttpResponseHandler } = require('intelli-utility');
+// Service function to publish a Resource by ID
+const publishResourceById = async (resourceId, publishStatus) => {
+  try {
 
-// Controller function to get a  resource by userId
-const publishResourceById = async (req, res, next) => {
-    try {
-        const publishStatus = req.body.publishStatus
-        const Resource = await ResourceService.publishResourceById(req.query.Id, publishStatus);
-        
-        if (!Resource) {
-            return HttpResponseHandler.success(req, res, Resource);
-        }
+    let resource = await ResourceData.findById(mongoose.Types.ObjectId(resourceId));
 
-        return HttpResponseHandler.success(req, res, Resource);
+    // if (publishStatus == 'true') {
+    //   //send notification to teacher_> userId
+    //   const NotificationData = {
+    //     userId: resource.userId,
+    //     appName: 'teacherApp',
+    //     data: {
+    //       message: 'Your Resource has been Added',
+    //     },
+    //     body: 'Your Resource has been Added',
+    //     title: 'Your Resource has been Added'
+    //   };
 
-    } catch (error) {
-        next(error)
+    //   const teacher = await pushNotification(NotificationData) // send  Notification to teacher 
+
+    //   // // class and subject // need all student Ids to send Notification
+    //   const students = await getStudentsBySubjectAndClass(resource.class, resource.subject);
+    //   // // send notification to all student
+    //   notifyStudentsForResourceUpdation(students);
+    // }
+    // else {
+
+    //   const NotificationData = {
+    //     userId: resource.userId,
+    //     appName: 'teacherApp',
+    //     data: {
+    //       message: 'Your Resource has been not Added',
+    //     },
+    //     body: 'Your Resource has been not Added',
+    //     title: 'Your Resource has been not Added'
+    //   };
+
+      // const teacher = await pushNotification(NotificationData) // send  Notification to teacher 
     }
-
+    resource.publishStatus = publishStatus;
+    await resource.save();
+    return resource;
+  } catch (error) {
+    throw new Error('Failed to publish  Resource');
+  }
 };
 
 module.exports = {
-    publishResourceById
+  publishResourceById
 }  

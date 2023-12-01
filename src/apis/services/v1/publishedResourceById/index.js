@@ -1,14 +1,23 @@
-const ResourceData = require('@models/Assignment');
+const ResourceService = require('@root/src/apis/services/v1/publishedResourceById');
 
-// Service function to publish a Resource by ID
-const publishResourceById = async (resourceId) => {
-  try {
-    let publishStatus = 'true';
-    const resource = await ResourceData.findByIdAndUpdate({ _id: resourceId }, { publishStatus });
-    return resource;
-  } catch (error) {
-    throw new Error('Failed to publish  Resource');
-  }
+const { HttpResponseHandler } = require('intelli-utility');
+
+// Controller function to get a  resource by userId
+const publishResourceById = async (req, res, next) => {
+    try {
+        const publishStatus = req.body.publishStatus
+        const Resource = await ResourceService.publishResourceById(req.query.Id, publishStatus);
+        
+        if (!Resource) {
+            return HttpResponseHandler.success(req, res, Resource);
+        }
+
+        return HttpResponseHandler.success(req, res, Resource);
+
+    } catch (error) {
+        next(error)
+    }
+
 };
 
 module.exports = {
